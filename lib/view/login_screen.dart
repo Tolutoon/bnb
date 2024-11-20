@@ -1,4 +1,7 @@
+import 'package:airbnb_clone/authentication/google_authentication.dart';
+import 'package:airbnb_clone/view/main_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -47,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       RichText(
                           text: const TextSpan(
                               text:
-                                  "We'll call or text you to conform your number. Standard message and data rates apply.",
+                                  "We'll call or text you to confirm your number. Standard message and data rates apply.",
                               style:
                                   TextStyle(fontSize: 15, color: Colors.black),
                               children: [
@@ -74,7 +77,53 @@ class _LoginScreenState extends State<LoginScreen> {
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white),
                             ),
+                          )),
+                      SizedBox(
+                        height: size.height * 0.026,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                              child: Container(
+                            height: 1,
+                            color: Colors.black26,
+                          )),
+                          const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 20),
+                            child: Text(
+                              "or",
+                              style: TextStyle(fontSize: 18),
+                            ),
+                          ),
+                          Expanded(
+                              child: Container(
+                            height: 1,
+                            color: Colors.black26,
                           ))
+                        ],
+                      ),
+                      SizedBox(
+                        height: size.height * 0.015,
+                      ),
+                      socialIcons(size, Icons.facebook,
+                          "Continue with Facebook", Colors.blue, 30),
+                      // google authentication
+
+                      InkWell(
+                        onTap: () async {
+                          await FirebaseAuthService().signInWithGoogle();
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => MainScreen()));
+                        },
+                        child: socialIcons(size, FontAwesomeIcons.google,
+                            "Continue with Google", Colors.pink, 27),
+                      ),
+                      socialIcons(size, Icons.apple, "Continue with Apple",
+                          Colors.black, 30),
+                      socialIcons(size, Icons.email_outlined,
+                          "Continue with Email", Colors.black, 30),
                     ],
                   ),
                 )
@@ -83,6 +132,37 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
+}
+
+Padding socialIcons(Size size, icon, name, color, double iconSize) {
+  return Padding(
+      padding: const EdgeInsets.only(bottom: 15),
+      child: Container(
+        width: size.width,
+        padding: const EdgeInsets.symmetric(vertical: 11),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12), border: Border.all()),
+        child: Row(
+          children: [
+            SizedBox(width: size.width * 0.05),
+            Icon(
+              icon,
+              color: color,
+              size: iconSize,
+            ),
+            SizedBox(
+              width: size.width * 0.18,
+            ),
+            Text(
+              name,
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+            ),
+            const SizedBox(
+              width: 10,
+            )
+          ],
+        ),
+      ));
 }
 
 Container phoneNumberField(Size size) {
