@@ -1,3 +1,4 @@
+import 'package:airbnb_clone/components/display_place.dart';
 import 'package:airbnb_clone/components/search_bar_and_filter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -20,16 +21,19 @@ class _ExploreScreenState extends State<ExploreScreen> {
       backgroundColor: Colors.white,
       body: SafeArea(
           bottom: false,
-          child: Column(
-            children: [
-              SizedBox(
-                height: 16,
-              ),
-              //for search bar and filter button
-              const SearchBarAndFilter(),
-              //fetch from firestore
-              listOfCategoryItems(size)
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 16,
+                ),
+                //for search bar and filter button
+                const SearchBarAndFilter(),
+                //fetch from firestore
+                listOfCategoryItems(size),
+                const DisplayPlace()
+              ],
+            ),
           )),
     );
   }
