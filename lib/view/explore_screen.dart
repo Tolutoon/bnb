@@ -1,4 +1,5 @@
 import 'package:airbnb_clone/components/display_place.dart';
+import 'package:airbnb_clone/components/display_total_price.dart';
 import 'package:airbnb_clone/components/search_bar_and_filter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +32,13 @@ class _ExploreScreenState extends State<ExploreScreen> {
                 const SearchBarAndFilter(),
                 //fetch from firestore
                 listOfCategoryItems(size),
+                const SizedBox(
+                  height: 5,
+                ),
+                const DisplayTotalPrice(),
+                const SizedBox(
+                  height: 10,
+                ),
                 const DisplayPlace()
               ],
             ),
