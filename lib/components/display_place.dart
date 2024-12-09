@@ -106,20 +106,7 @@ class _DisplayPlaceState extends State<DisplayPlace> {
                             ),
                           ),
                           // for vendor profile
-                          Positioned(
-                              bottom: 11,
-                              left: 10,
-                              child: Stack(
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(15),
-                                        bottomRight: Radius.circular(15)),
-                                    child: Image.asset(
-                                        "asset/images/book_cover.png"),
-                                  )
-                                ],
-                              ))
+                          vendorProfile(place)
                         ],
                       ),
                     ],
@@ -132,5 +119,33 @@ class _DisplayPlaceState extends State<DisplayPlace> {
         return const Center(child: CircularProgressIndicator());
       },
     );
+  }
+
+  Positioned vendorProfile(QueryDocumentSnapshot<Object?> place) {
+    return Positioned(
+                            bottom: 11,
+                            left: 10,
+                            child: Stack(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(15),
+                                      bottomRight: Radius.circular(15)),
+                                  child: Image.asset(
+                                    "asset/images/book_cover.png",
+                                    height: 60,
+                                    width: 60,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                Positioned(
+                                    top: 10,
+                                    left: 10,
+                                    child: CircleAvatar(
+                                      backgroundImage: NetworkImage(
+                                          place['vendorProfile']),
+                                    ))
+                              ],
+                            ));
   }
 }
