@@ -109,6 +109,56 @@ class _DisplayPlaceState extends State<DisplayPlace> {
                           vendorProfile(place)
                         ],
                       ),
+                      SizedBox(
+                        height: size.height * 0.01,
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            place['address'],
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black),
+                          ),
+                          const Spacer(),
+                          const Icon(Icons.star),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Text(place['rating'].toString())
+                        ],
+                      ),
+                      Text(
+                        "Stay with ${place['vendor']} . ${place['vendorProfession']}",
+                        style: TextStyle(color: Colors.black54, fontSize: 16.5),
+                      ),
+                      Text(
+                        place['date'],
+                        style: const TextStyle(
+                            fontSize: 16.5, color: Colors.black54),
+                      ),
+                      SizedBox(
+                        height: size.height * 0.007,
+                      ),
+                      RichText(
+                          text: TextSpan(
+                              text: "\$${place['price']}",
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                  fontSize: 16),
+                              children: const [
+                            TextSpan(
+                                text: "night",
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.normal))
+                          ])),
+                      SizedBox(
+                        height: size.height * 0.025,
+                      )
                     ],
                   ),
                 ),
@@ -123,29 +173,28 @@ class _DisplayPlaceState extends State<DisplayPlace> {
 
   Positioned vendorProfile(QueryDocumentSnapshot<Object?> place) {
     return Positioned(
-                            bottom: 11,
-                            left: 10,
-                            child: Stack(
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(15),
-                                      bottomRight: Radius.circular(15)),
-                                  child: Image.asset(
-                                    "asset/images/book_cover.png",
-                                    height: 60,
-                                    width: 60,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                Positioned(
-                                    top: 10,
-                                    left: 10,
-                                    child: CircleAvatar(
-                                      backgroundImage: NetworkImage(
-                                          place['vendorProfile']),
-                                    ))
-                              ],
-                            ));
+        bottom: 11,
+        left: 10,
+        child: Stack(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(15),
+                  bottomRight: Radius.circular(15)),
+              child: Image.asset(
+                "asset/images/book_cover.png",
+                height: 60,
+                width: 60,
+                fit: BoxFit.cover,
+              ),
+            ),
+            Positioned(
+                top: 10,
+                left: 10,
+                child: CircleAvatar(
+                  backgroundImage: NetworkImage(place['vendorProfile']),
+                ))
+          ],
+        ));
   }
 }
